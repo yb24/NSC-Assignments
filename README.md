@@ -1,2 +1,3 @@
 # NSC-Assignments
-Network Security [CSE 350] - Course Repository
+<p>Course: Network Security [CSE 350]</p>
+<p>Semester: Winter 2023</p>
