@@ -112,11 +112,17 @@ def launch_brute_force_attack(listOfCipherTexts):
             for key_char_3 in charSet:
                 for key_char_4 in charSet:
                     currentKey = key_char_1 + key_char_2 + key_char_3 + key_char_4
+                    print('Checking key: {}'.format(currentKey))
+                    currentKeyValidForCipherTexts = 0
                     for currentCipherText in listOfCipherTexts:
                         if not is_key_valid(currentCipherText, currentKey):
                             continue
-                        decryptedKey = currentKey
-                        return decryptedKey
+                        else:
+                            currentKeyValidForCipherTexts += 1
+                            print('Key: {} is valid for ciphertext: {}'.format(currentKey, currentCipherText))
+                    if currentKeyValidForCipherTexts == 5:
+                        print('Key: {} is valid for all ciphertexts'.format(currentKey))
+                        return currentKey
 
 
 if __name__ == "__main__":
