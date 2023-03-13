@@ -185,7 +185,12 @@ def TransformToString(arr):
 
     for col in range(arr.shape[1]):
         for row in range(arr.shape[0]):
-            stringForm += hex(arr[row, col])[2:]
+            data = hex(arr[row, col])[2:]
+            if len(data) == 0:
+                data = '00'
+            elif len(data) == 1:
+                data = '0' + data
+            stringForm += data
 
     return stringForm
 
@@ -292,16 +297,6 @@ def InverseShiftRows(stateArr):
     return stateArr
 
 
-def AddRoundKey(stateArr, subKey):
-    """
-    Performs element wise xor with the sub-key for the current round
-    :param stateArr: numpy 2d matrix
-    :param subKey: sub-key for current round
-    :return: modified state array, numpy 2d matrix
-    """
-    return np.bitwise_xor(stateArr, subKey)
-
-
 def MixColumns(stateArr):
     """
     Performs mix column operation on current state array
@@ -366,6 +361,16 @@ def InverseMixColumns(stateArr):
                                        MultiplyByETable[stateArr[3, col]]
 
     return inverseMixColumnsArr
+
+
+def AddRoundKey(stateArr, subKey):
+    """
+    Performs element wise xor with the sub-key for the current round
+    :param stateArr: numpy 2d matrix
+    :param subKey: sub-key for current round
+    :return: modified state array, numpy 2d matrix
+    """
+    return np.bitwise_xor(stateArr, subKey)
 
 
 def Encrypt(stateArr, subKeys):
@@ -475,3 +480,6 @@ def EncryptDecrypt(plaintext, key):
 if __name__ == "__main__":
     EncryptDecrypt('3243f6a8885a308d313198a2e0370734', '2b7e151628aed2a6abf7158809cf4f3c')
     EncryptDecrypt('00112233445566778899aabbccddeeff', '000102030405060708090a0b0c0d0e0f')
+    EncryptDecrypt('0123456789abcdeffedcba9876543210', '0f1571c947d9e8590cb7add6af7f6798')
+    EncryptDecrypt('00000000000000000000000000000000', '00000000000000000000000000000000')
+    EncryptDecrypt('ffffffffffffffffffffffffffffffff', '11111111111111111111111111111111')
