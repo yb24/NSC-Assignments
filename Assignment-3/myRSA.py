@@ -90,9 +90,7 @@ def Decrypt(ciphertext, decryptKey):
 
 
 def Test():
-    # pv = (9100758509, 1007434656649)
     pv = (233, 713)
-    # pu = (151282538209, 1007434656649)
     pu = (17, 713)
     hs = ['Hi1', '6bb57451591395560560cb96e6047708e397a62c8a4448d2d34da5ed0b498b46|641a6b54244c2370cc5f08eb1a2a6ab5c67703d5fb54d58822eb9fc791ef90c8']
 
